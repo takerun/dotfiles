@@ -1,24 +1,31 @@
-### zsh_completions
-if type brew &>/dev/null; then
-  chmod -R go-w $(brew --prefix)/share/zsh
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit && compinit
-fi
-
-
 ### ls color
 alias ls='ls -G'
 
 
-### git command settings
-# display of command results
-#source /usr/local/etc/bash_completion.d/git-prompt.sh
-#source /usr/local/etc/bash_completion.d/git-completion.bash
-#GIT_PS1_SHOWDIRTYSTATE=true
-#export PS1='\[\033[37m\][\[\033[36m\]\u \[\033[32m\]\W\[\033[37m\]]\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+### prompt format with https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=true
+setopt PROMPT_SUBST ; PS1='[%F{cyan}%n%f %F{green}%c%f]%F{red}$(__git_ps1 "(%s)")%f %# '
 
 
-### pyenv settings
+### newline next to command results
+add_newline() {
+  if [[ -z $PS1_NEWLINE_LOGIN ]]; then
+    PS1_NEWLINE_LOGIN=true
+  else
+    printf '\n'
+  fi
+}
+precmd() { add_newline }
+
+
+### targz not including ._ and .DS_Store
+tgz() {
+  env COPYFILE_DISABLE=1 tar zcvf $1 --exclude=".DS_Store" ${@:2}
+}
+
+
+### pyenv
 # enable completion
 if type pyenv &>/dev/null; then
   eval "$(pyenv init -)";
@@ -27,12 +34,31 @@ fi
 # pyenvのデフォルトではリソースを~/.pyenvに入れる
 # export PYENV_ROOT=/usr/local/var/pyenv
 
-### poetry settings
-#export PATH=$HOME/.poetry/bin:$PATH
+
+### poetry
+export PATH=$HOME/.local/bin:$PATH
 # enable completion
-#if which poetry > /dev/null; then
-#  poetry completions bash > $(brew --prefix)/etc/bash_completion.d/poetry.bash-completion
-#fi
+if type poetry &>/dev/null; then
+  poetry completions zsh > $HOME/.local/completion/_poetry
+fi
+
+
+### nvm
+export NVM_DIR=$HOME/.nvm
+[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . $(brew --prefix)/opt/nvm/nvm.sh
+
+
+### Rust
+export CARGO_HOME=$HOME/.cargo
+export RUSTUP_HOME=$HOME/.rustup
+export PATH="$CARGO_HOME/bin:$PATH"
+# enable completion
+if type cargo &>/dev/null; then
+  ln -fs "$RUSTUP_HOME/toolchains/stable-x86_64-apple-darwin/share/zsh/site-functions/_cargo" "$HOME/.local/completion/"
+fi
+if type rustup &>/dev/null; then
+  rustup completions zsh > $HOME/.local/completion/_rustup
+fi
 
 ### java settings
 # 1.8.1: -v "1.8"
@@ -41,7 +67,11 @@ fi
 #export PATH=${JAVA_HOME}/bin:${PATH}
 
 
-# Rust
-export CARGO_HOME=~/Library/Rust/.cargo
-export RUSTUP_HOME=~/Library/Rust/.rustup
-export PATH="$CARGO_HOME/bin:$PATH"
+### zsh_completions zsh_autosuggestions
+FPATH=$HOME/.local/completion:$FPATH
+if type brew &>/dev/null; then
+  chmod -R 755 $(brew --prefix)/share
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+autoload -Uz compinit && compinit

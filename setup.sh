@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 set -eu
 
 
@@ -26,14 +26,14 @@ brew bundle -v --file=${CURRENT_DIR}/Brewfile
 for f in $(find ${CURRENT_DIR}/dotfile -maxdepth 1 -type f -name ".*"); do
   [[ $f == *".DS_Store" ]] && continue
   echo "Making symbolic link: $f"
-  ln -sf "$f" ~/
+  ln -sf "$f" $HOME/
 done
 
 # restarting zsh
-source ~/.zshrc
+source $HOME/.zshrc
 
 # package or config installed manually
 for f in $(find ${CURRENT_DIR}/package -name "init.sh"); do
-  bash "$f"
+  zsh "$f"
 done
 
