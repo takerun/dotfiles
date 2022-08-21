@@ -48,6 +48,12 @@ export NVM_DIR=$HOME/.nvm
 [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . $(brew --prefix)/opt/nvm/nvm.sh
 
 
+### g++
+if type /usr/local/bin/g++-11 &>/dev/null; then
+  ln -fs /usr/local/bin/g++-11 /usr/local/bin/g++
+fi
+
+
 ### Rust
 export CARGO_HOME=$HOME/.cargo
 export RUSTUP_HOME=$HOME/.rustup
