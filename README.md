@@ -1,17 +1,34 @@
 ### dotfiles
 
-#### usage
+#### Get started
 
-```
-zsh dotfiles/setup.sh
-```
+1. Download this repo as zip file.
+2. Open standard terminal app, Run the following command.
+  ```
+  mv Downloads/dotfiles-master ~/dotfiles
+  zsh dotfiles/setup.sh
+  ```
+3. Reboot your computer.
+4. Open standard terminal app, Run the following command.
+  ```
+  defaults read com.googlecode.iterm2
+  ```
+5. Connect local git project with remote.
+  ```
+  cd ~/dotfiles
+  git init
+  git remote add origin https://github.com/takerun/dotfiles.git
+  git add .
+  git pull origin master
+  ```
 
-* iTerm2の設定は再起動しないと反映されない。
+
+#### Optional
 * poetryは個別にスクリプト実行する。pythonのバージョンを決めてから。
   ```
   zsh dotfiles/package/poetry/install.sh
   ```
 
-#### TODO
 
-xcode-select --installの確認方法は別途検討。
+#### TODO
+* defaultsコマンドもスクリプトで実行したい。
