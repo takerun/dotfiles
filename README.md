@@ -33,3 +33,4 @@
 #### TODO
 * defaultsコマンドもスクリプトで実行したい。
 * 再起動前に`defaults write -g InitialKeyRepeat -int 25`、`defaults write -g KeyRepeat -int 2`を実行したい。
+* ClipyのショートカットとVSCodeのショートカットcommand+shift+Bが被る。
