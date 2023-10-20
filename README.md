@@ -34,3 +34,6 @@
 * defaultsコマンドもスクリプトで実行したい。
 * 再起動前に`defaults write -g InitialKeyRepeat -int 25`、`defaults write -g KeyRepeat -int 2`を実行したい。
 * ClipyのショートカットとVSCodeのショートカットcommand+shift+Bが被る。
+* 2023/10時点では、g++環境の「#include <bits/stdc++.h>」とxcode commandlinetoolsの相性が悪く、14.3.1にダウングレードした。
+  - https://developer.apple.com/download/all/ から手動でインストールした
+  - 加えて、この対応をなぜか必要だった。https://qiita.com/ikoanymg/items/b108e97093b50662673d

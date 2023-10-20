@@ -53,9 +53,10 @@ export NVM_DIR=$HOME/.nvm
 
 
 ### g++
-if type $(brew --prefix)/bin/g++-11 &>/dev/null; then
-  ln -fs $(brew --prefix)/bin/g++-11 $(brew --prefix)/bin/g++
+if type $(brew --prefix)/bin/g++-12 &>/dev/null; then
+  ln -fs $(brew --prefix)/bin/g++-12 $(brew --prefix)/bin/g++
 fi
+export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
 
 ### Rust
