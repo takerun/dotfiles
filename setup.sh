@@ -6,6 +6,7 @@ set -eu
 CURRENT_DIR=$(cd "$(dirname "$0")"; pwd)
 
 # xcode-select
+# upgrade command: sudo rm -rf /Library/Developer/CommandLineTools
 if ! xcode-select -p 1>/dev/null; then
   echo "Installing xcode-select"
   xcode-select --install

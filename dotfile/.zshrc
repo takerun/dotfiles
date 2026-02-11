@@ -29,34 +29,19 @@ tgz() {
 }
 
 
-### pyenv
+### uv
 # enable completion
-if type pyenv &>/dev/null; then
-  eval "$(pyenv init -)";
+if type uv &>/dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
 fi
-# enable singleton resource folder (shims and versions)
-# pyenvのデフォルトではリソースを~/.pyenvに入れる
-# export PYENV_ROOT=/usr/local/var/pyenv
-
-
-### poetry
-export PATH=$HOME/.local/bin:$PATH
-# enable completion
-if type poetry &>/dev/null; then
-  poetry completions zsh > $HOME/.local/completion/_poetry
+if type uvx &>/dev/null; then
+  eval "$(uvx --generate-shell-completion zsh)"
 fi
 
 
 ### nvm
 export NVM_DIR=$HOME/.nvm
 [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . $(brew --prefix)/opt/nvm/nvm.sh
-
-
-### g++
-if type $(brew --prefix)/bin/g++-12 &>/dev/null; then
-  ln -fs $(brew --prefix)/bin/g++-12 $(brew --prefix)/bin/g++
-fi
-export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
 
 
 ### Rust
@@ -70,12 +55,6 @@ fi
 if type rustup &>/dev/null; then
   rustup completions zsh > $HOME/.local/completion/_rustup
 fi
-
-### java settings
-# 1.8.1: -v "1.8"
-# 10.0.1: -v "10.0"
-#export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8")
-#export PATH=${JAVA_HOME}/bin:${PATH}
 
 
 ### zsh_completions zsh_autosuggestions
