@@ -8,7 +8,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ### Homebrew prefix cache
 if type brew &>/dev/null; then
-  readonly BREW_PREFIX="$(brew --prefix)"
+  if [[ -z "${BREW_PREFIX}" ]]; then
+    readonly BREW_PREFIX="$(brew --prefix)"
+  fi
 else
   echo "Warning: Homebrew is not installed" >&2
 fi
