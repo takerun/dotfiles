@@ -1,65 +1,80 @@
-" setting
-"文字コードをUFT-8に設定
+"Vimの設定ファイル"
+
+
+"基本的な設定"
+"文字コードをUTF-8に設定"
 set fenc=utf-8
-" バックアップファイルを作らない
+"バックアップファイルを作らない"
 set nobackup
-" スワップファイルを作らない
+"スワップファイルを作らない"
 set noswapfile
-" 編集中のファイルが変更されたら自動で読み直す
+"編集中のファイルが変更されたら自動で読み直す"
 set autoread
-" バッファが編集中でもその他のファイルを開けるように
+"バッファが編集中でもその他のファイルを開けるように"
 set hidden
-" 入力中のコマンドをステータスに表示する
+"入力中のコマンドをステータスに表示する"
 set showcmd
 
 
-" 見た目系
-" 行番号を表示
+"編集効率を上げるため"
+"OSのクリップボードをデフォルトのコピー先にする"
+set clipboard=unnamed
+"挿入モードを抜けるとIMEをオフにする"
+set iminsert=0
+set imsearch=-1
+
+
+"見た目をよくするため"
+"行番号を表示"
 set number
-" 現在の行を強調表示
-set cursorline
-" 現在の行を強調表示（縦）
-set cursorcolumn
-" 行末の1文字先までカーソルを移動できるように
+"行末の1文字先までカーソルを移動できるように"
 set virtualedit=onemore
-" インデントはスマートインデント
+"インデントはスマートインデント"
 set smartindent
-" ビープ音を可視化
+"ビープ音を可視化"
 set visualbell
-" 括弧入力時の対応する括弧を表示
+"括弧入力時の対応する括弧を表示"
 set showmatch
-" ステータスラインを常に表示
+"ステータスラインを常に表示"
 set laststatus=2
-" コマンドラインの補完
+"コマンドラインの補完"
 set wildmode=list:longest
-" 折り返し時に表示行単位での移動できるようにする
+"折り返し時に表示行単位での移動できるようにする"
 nnoremap j gj
 nnoremap k gk
-" シンタックスハイライトの有効化
+"シンタックスハイライトの有効化"
 syntax enable
 
 
-" Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
+"空白,タブの周り"
+"不可視文字を可視化(タブが「▸-」と表示される)"
 set list listchars=tab:\▸\-
-" Tab文字を半角スペースにする
+"Tab文字を半角スペースにする"
 set expandtab
-" 行頭以外のTab文字の表示幅（スペースいくつ分）
+"行頭以外のTab文字の表示幅（スペースいくつ分）"
 set tabstop=2
-" 行頭でのTab文字の表示幅
+"行頭でのTab文字の表示幅"
 set shiftwidth=2
+"全角スペースを可視化（ミス防止）"
+highlight ZenkakuSpace ctermbg=red guibg=red
+match ZenkakuSpace /　/
+"改行時に前の行のインデントを継続する"
+set autoindent
 
 
-" 検索系
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+"検索系"
+"検索文字列が小文字の場合は大文字小文字を区別なく検索する"
 set ignorecase
-" 検索文字列に大文字が含まれている場合は区別して検索する
+"検索文字列に大文字が含まれている場合は区別して検索する"
 set smartcase
-" 検索文字列入力時に順次対象文字列にヒットさせる
+"検索文字列入力時に順次対象文字列にヒットさせる"
 set incsearch
-" 検索時に最後まで行ったら最初に戻る
+"検索時に最後まで行ったら最初に戻る"
 set wrapscan
-" 検索語をハイライト表示
+"検索語をハイライト表示"
 set hlsearch
-" ESC連打でハイライト解除
+"ESC連打でハイライト解除"
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+"検索後にジャンプした際、画面の真ん中に来るようにする"
+nnoremap n nzz
+nnoremap N Nzz

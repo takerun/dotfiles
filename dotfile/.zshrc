@@ -29,36 +29,27 @@ tgz() {
 }
 
 
-### uv
-# enable completion
-if type uv &>/dev/null; then
-  eval "$(uv generate-shell-completion zsh)"
-fi
-if type uvx &>/dev/null; then
-  eval "$(uvx --generate-shell-completion zsh)"
-fi
-
-
 ### nvm
 export NVM_DIR=$HOME/.nvm
 [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . $(brew --prefix)/opt/nvm/nvm.sh
 
 
 ### Rust
-export CARGO_HOME=$HOME/.cargo
-export RUSTUP_HOME=$HOME/.rustup
+export CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/.rustup"
 export PATH="$CARGO_HOME/bin:$PATH"
 # enable completion
 if type cargo &>/dev/null; then
   ln -fs "$RUSTUP_HOME/toolchains/stable-aarch64-apple-darwin/share/zsh/site-functions/_cargo" "$HOME/.local/completion/"
 fi
 if type rustup &>/dev/null; then
-  rustup completions zsh > $HOME/.local/completion/_rustup
+  rustup completions zsh > "$HOME/.local/completion/_rustup"
 fi
 
 
-### zsh_completions zsh_autosuggestions
-FPATH=$HOME/.local/completion:$FPATH
+### completion settings
+# zsh_completions zsh_autosuggestions
+FPATH="$HOME/.local/completion:$FPATH"
 if type brew &>/dev/null; then
   chmod -R 755 $(brew --prefix)/share
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
