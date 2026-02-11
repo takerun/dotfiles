@@ -32,6 +32,10 @@ This is a macOS dotfiles repository that automates the setup of development envi
   - CLI tools: zsh-completions, zsh-autosuggestions, wget, tree, git, uv, nvm, rustup-init
   - Applications: iTerm2, Claude Code, VS Code, Chrome, Google Drive, Discord, Clipy
 
+- **doc/**: Documentation and guidelines
+  - SHELL_STYLE_GUIDE.md: Comprehensive Zsh scripting coding standards
+  - TODO.md: Implementation progress tracking for major changes
+
 ### Design Pattern
 
 The package system allows modular additions: to add a new tool, create `package/toolname/init.sh` and it will automatically run during setup. Each package's init script should be idempotent (safe to run multiple times).
@@ -76,11 +80,55 @@ brew bundle --file=Brewfile
 # (Recommended: use a VM or test macOS installation)
 # The script is idempotent and safe to re-run
 zsh setup.sh
+
+# Syntax check for shell scripts
+zsh -n setup.sh
+zsh -n package/*/init.sh
+
+# Test .zshrc loading
+zsh -c "source dotfile/.zshrc && echo 'Load successful'"
 ```
+
+## Coding Standards
+
+All shell scripts in this repository follow the Zsh coding standards defined in [doc/SHELL_STYLE_GUIDE.md](doc/SHELL_STYLE_GUIDE.md).
+
+### Key Rules
+
+1. **Error Handling**: All executable scripts use `set -eu` (not `set -ue`)
+2. **Variable Expansion**: Always use `"${var}"` format for consistency and safety
+3. **Quoting**: Quote all variable expansions to prevent word splitting
+4. **Performance**: Cache expensive command results (e.g., `brew --prefix`)
+5. **Conditionals**: Use `[[ ]]` for tests (Zsh-native)
+6. **Functions**: Use lowercase with underscores; declare local variables with `local`
+
+### Examples
+
+```zsh
+# Good
+export CARGO_HOME="${HOME}/.cargo"
+if [[ -f "${file}" ]]; then
+  echo "File exists: ${file}"
+fi
+
+# Bad
+export CARGO_HOME=$HOME/.cargo
+if [ -f $file ]; then
+  echo "File exists: $file"
+fi
+```
+
+### Before Committing
+
+- Run syntax checks: `zsh -n <script>`
+- Verify variable quoting with `"${var}"` format
+- Check that functions use `local` for variables
+- Ensure `set -eu` is present in executable scripts
 
 ## Key Behaviors
 
 - **Symlink Strategy**: Dotfiles use symlinks rather than copies, so changes to files in `dotfile/` immediately affect the system without re-running setup
-- **Package Init Scripts**: Must be executable and use `#!/bin/zsh` shebang. Should use `set -ue` for error handling
+- **Package Init Scripts**: Must be executable and use `#!/bin/zsh` shebang. Use `set -eu` for error handling (standardized across all init scripts)
 - **Setup Script Error Handling**: Uses `set -eu` to exit on errors. Xcode installation includes a blocking wait loop until GUI installation completes
 - **Path Precedence**: .zshrc sets up paths in this order: Cargo/Rust bins, Homebrew paths, then system defaults
+- **Performance Optimization**: .zshrc caches `brew --prefix` result (reduces 6 calls to 1, saving ~0.5-1s on shell startup)
