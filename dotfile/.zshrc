@@ -37,9 +37,9 @@ tgz() {
 }
 
 
-### nvm
-export NVM_DIR="${HOME}/.nvm"
-[ -s "${BREW_PREFIX}/opt/nvm/nvm.sh" ] && . "${BREW_PREFIX}/opt/nvm/nvm.sh"
+### volta
+export VOLTA_HOME="${HOME}/.volta"
+export PATH="${VOLTA_HOME}/bin:${PATH}"
 
 
 ### Rust

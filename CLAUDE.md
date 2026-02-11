@@ -19,17 +19,17 @@ This is a macOS dotfiles repository that automates the setup of development envi
   6. Executes all `init.sh` scripts found in `package/` subdirectories
 
 - **dotfile/**: Contains configuration files that get symlinked to home directory
-  - .zshrc: Shell configuration with git prompt, nvm, Rust paths, and completion setup
+  - .zshrc: Shell configuration with git prompt, volta, Rust paths, and completion setup
   - .vimrc: Vim editor configuration
   - .gitconfig: Git configuration
 
 - **package/**: Modular initialization system
-  - Each subdirectory represents a tool/package (iTerm2, nvm, rust)
+  - Each subdirectory represents a tool/package (iTerm2, volta, rust)
   - Optional `init.sh` in each subdirectory runs during setup
   - Used for tool-specific setup tasks that can't be handled by symlinks alone
 
 - **Brewfile**: Defines Homebrew packages and casks to install
-  - CLI tools: zsh-completions, zsh-autosuggestions, wget, tree, git, uv, nvm, rustup-init
+  - CLI tools: zsh-completions, zsh-autosuggestions, wget, tree, git, uv, volta, rustup-init
   - Applications: iTerm2, Claude Code, VS Code, Chrome, Google Drive, Discord, Clipy
 
 - **doc/**: Documentation and guidelines
