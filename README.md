@@ -21,7 +21,11 @@
   git add .
   git pull origin master
   ```
-6. Run user preforence.
+6. Authenticate github.
+  ```
+  gh auth login
+  ```
+7. Run user preforence.
   ```
   defaults write -g InitialKeyRepeat -int 25
   defaults write -g KeyRepeat -int 2
