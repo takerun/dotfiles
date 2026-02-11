@@ -1,5 +1,5 @@
 #!/bin/zsh
-set -ue
+set -eu
 
 
 if ! type rustup &>/dev/null; then

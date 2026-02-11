@@ -3,10 +3,10 @@ set -eu
 
 # --- Colors ---
 # 太字(Bold)などの装飾を組み合わせると視認性が上がります
-BOLD_GREEN='\033[1;32m'
-BOLD_YELLOW='\033[1;33m'
-BOLD_CYAN='\033[1;36m'
-NC='\033[0m' # No Color (リセット用)
+export BOLD_GREEN='\033[1;32m'
+export BOLD_YELLOW='\033[1;33m'
+export BOLD_CYAN='\033[1;36m'
+export NC='\033[0m' # No Color (リセット用)
 
 # env
 CURRENT_DIR=$(cd "$(dirname "$0")"; pwd)
@@ -63,7 +63,7 @@ if [[ -d "${CURRENT_DIR}/dotfile" ]]; then
     find "${CURRENT_DIR}/dotfile" -maxdepth 1 -type f -name ".*" | while read -r f; do
         [[ "${f:t}" == ".DS_Store" ]] && continue
         echo "Linking: ${f:t}"
-        ln -sf "$f" "${HOME}/"
+        ln -sf "${f}" "${HOME}/"
     done
 fi
 
@@ -72,8 +72,8 @@ mkdir -p "${HOME}/.local/completion"
 
 # --- Run package-specific init scripts ---
 for f in $(find "${CURRENT_DIR}/package" -type f -name "init.sh" 2>/dev/null); do
-    echo "Running init: $f"
-    zsh "$f"
+    echo "Running init: ${f}"
+    zsh "${f}"
 done
 
 # --- Finalize ---

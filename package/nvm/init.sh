@@ -1,5 +1,5 @@
 #!/bin/zsh
-set -ue
+set -eu
 
 if [[ ! -d "${HOME}/.nvm" ]]; then
     echo "Setting NVM preferences..."

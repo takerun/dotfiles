@@ -1,5 +1,5 @@
 #!/bin/zsh
-set -ue
+set -eu
 
 CURRENT_DIR=$(cd "$(dirname "$0")"; pwd)
 
