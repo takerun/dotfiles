@@ -57,10 +57,10 @@ else
     echo "Warning: Brewfile not found at ${CURRENT_DIR}/Brewfile"
 fi
 
-# --- Symbolic linking for dotfiles ---
+# --- Symbolic linking for dotfiless ---
 echo "Creating symbolic links..."
-if [[ -d "${CURRENT_DIR}/dotfile" ]]; then
-    find "${CURRENT_DIR}/dotfile" -maxdepth 1 -type f -name ".*" | while read -r f; do
+if [[ -d "${CURRENT_DIR}/dotfiles" ]]; then
+    find "${CURRENT_DIR}/dotfiles" -maxdepth 1 -type f -name ".*" | while read -r f; do
         [[ "${f:t}" == ".DS_Store" ]] && continue
         echo "Linking: ${f:t}"
         ln -sf "${f}" "${HOME}/"
@@ -71,7 +71,7 @@ fi
 mkdir -p "${HOME}/.local/completion"
 
 # --- Run package-specific init scripts ---
-for f in $(find "${CURRENT_DIR}/package" -type f -name "init.sh" 2>/dev/null); do
+for f in $(find "${CURRENT_DIR}/packages" -type f -name "init.sh" 2>/dev/null); do
     echo "Running init: ${f}"
     zsh "${f}"
 done

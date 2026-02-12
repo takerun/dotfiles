@@ -10,10 +10,10 @@
 
 ### ✅ 完了
 
-- [x] SHELL_STYLE_GUIDE.mdの作成（`doc/SHELL_STYLE_GUIDE.md`）
-- [x] package/rust/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
-- [x] package/nvm/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
-- [x] package/iTerm2/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
+- [x] SHELL_STYLE_GUIDE.mdの作成（`docs/SHELL_STYLE_GUIDE.md`）
+- [x] packages/rust/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
+- [x] packages/nvm/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
+- [x] packages/iTerm2/init.shのエラーハンドリング修正（`set -ue` → `set -eu`）
 - [x] setup.shの修正
   - [x] 色定数にexportを追加
   - [x] 変数展開の統一（`"$f"` → `"${f}"`）
@@ -29,7 +29,7 @@
 
 ### 1. コーディング規約の作成
 
-**ファイル**: `doc/SHELL_STYLE_GUIDE.md`
+**ファイル**: `docs/SHELL_STYLE_GUIDE.md`
 
 Zshスクリプト用の包括的なコーディング規約を作成しました。以下の内容を含みます：
 - 基本方針（シェルの選択、適用範囲）
@@ -46,9 +46,9 @@ Zshスクリプト用の包括的なコーディング規約を作成しまし�
 ### 2. エラーハンドリングの統一
 
 **対象ファイル**:
-- `package/rust/init.sh`
-- `package/nvm/init.sh`
-- `package/iTerm2/init.sh`
+- `packages/rust/init.sh`
+- `packages/nvm/init.sh`
+- `packages/iTerm2/init.sh`
 
 **修正内容**: `set -ue` → `set -eu` に統一
 
@@ -64,7 +64,7 @@ Zshスクリプト用の包括的なコーディング規約を作成しまし�
 
 ### 4. .zshrcの大幅改善
 
-**ファイル**: `dotfile/.zshrc`
+**ファイル**: `dotfiles/.zshrc`
 
 **主な修正内容**:
 
@@ -135,6 +135,6 @@ Zshスクリプト用の包括的なコーディング規約を作成しまし�
 
 ## 参考
 
-- コーディング規約: [doc/SHELL_STYLE_GUIDE.md](SHELL_STYLE_GUIDE.md)
+- コーディング規約: [docs/SHELL_STYLE_GUIDE.md](SHELL_STYLE_GUIDE.md)
 - Google Shell Style Guide: https://google.github.io/styleguide/shellguide.html
 - ShellCheck: https://www.shellcheck.net/

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a macOS dotfiles repository that automates the setup of development environments and system preferences. The architecture follows a modular pattern with a main setup script that orchestrates dotfile installation and package-specific initialization.
+This is a macOS dotfiles repository that automates the setup of development environments and system preferences. The architecture follows a modular pattern with a main setup script that orchestrates dotfiles installation and packages-specific initialization.
 
 ## Architecture
 
@@ -14,16 +14,16 @@ This is a macOS dotfiles repository that automates the setup of development envi
   1. Installs Xcode Command Line Tools (with interactive GUI wait loop)
   2. Installs Homebrew if not present
   3. Runs `brew bundle` to install packages from Brewfile
-  4. Symlinks all files from `dotfile/` (excluding .DS_Store) to `$HOME/`
+  4. Symlinks all files from `dotfiles/` (excluding .DS_Store) to `$HOME/`
   5. Creates `~/.local/completion` directory
-  6. Executes all `init.sh` scripts found in `package/` subdirectories
+  6. Executes all `init.sh` scripts found in `packages/` subdirectories
 
-- **dotfile/**: Contains configuration files that get symlinked to home directory
+- **dotfiles/**: Contains configuration files that get symlinked to home directory
   - .zshrc: Shell configuration with git prompt, volta, Rust paths, and completion setup
   - .vimrc: Vim editor configuration
   - .gitconfig: Git configuration
 
-- **package/**: Modular initialization system
+- **packages/**: Modular initialization system
   - Each subdirectory represents a tool/package (iTerm2, volta, rust)
   - Optional `init.sh` in each subdirectory runs during setup
   - Used for tool-specific setup tasks that can't be handled by symlinks alone
@@ -32,13 +32,13 @@ This is a macOS dotfiles repository that automates the setup of development envi
   - CLI tools: zsh-completions, zsh-autosuggestions, wget, tree, git, uv, volta, rustup-init
   - Applications: iTerm2, Claude Code, VS Code, Chrome, Google Drive, Discord, Clipy
 
-- **doc/**: Documentation and guidelines
+- **docs/**: Documentation and guidelines
   - SHELL_STYLE_GUIDE.md: Comprehensive Zsh scripting coding standards
   - TODO.md: Implementation progress tracking for major changes
 
 ### Design Pattern
 
-The package system allows modular additions: to add a new tool, create `package/toolname/init.sh` and it will automatically run during setup. Each package's init script should be idempotent (safe to run multiple times).
+The package system allows modular additions: to add a new tool, create `packages/toolname/init.sh` and it will automatically run during setup. Each package's init script should be idempotent (safe to run multiple times).
 
 ## Common Commands
 
@@ -53,11 +53,11 @@ defaults read com.googlecode.iterm2
 
 ### Managing Dotfiles
 ```zsh
-# After modifying files in dotfile/, symlinks update automatically
-# No need to re-run setup.sh for dotfile changes
+# After modifying files in dotfiles/, symlinks update automatically
+# No need to re-run setup.sh for dotfiles changes
 
 # To add a new dotfile:
-# 1. Add the file to dotfile/ directory
+# 1. Add the file to dotfiles/ directory
 # 2. Run setup.sh to create the symlink
 ```
 
@@ -83,15 +83,15 @@ zsh setup.sh
 
 # Syntax check for shell scripts
 zsh -n setup.sh
-zsh -n package/*/init.sh
+zsh -n packages/*/init.sh
 
 # Test .zshrc loading
-zsh -c "source dotfile/.zshrc && echo 'Load successful'"
+zsh -c "source dotfiles/.zshrc && echo 'Load successful'"
 ```
 
 ## Coding Standards
 
-All shell scripts in this repository follow the Zsh coding standards defined in [doc/SHELL_STYLE_GUIDE.md](doc/SHELL_STYLE_GUIDE.md).
+All shell scripts in this repository follow the Zsh coding standards defined in [docs/SHELL_STYLE_GUIDE.md](docs/SHELL_STYLE_GUIDE.md).
 
 ### Key Rules
 
@@ -127,7 +127,7 @@ fi
 
 ## Key Behaviors
 
-- **Symlink Strategy**: Dotfiles use symlinks rather than copies, so changes to files in `dotfile/` immediately affect the system without re-running setup
+- **Symlink Strategy**: Dotfiles use symlinks rather than copies, so changes to files in `dotfiles/` immediately affect the system without re-running setup
 - **Package Init Scripts**: Must be executable and use `#!/bin/zsh` shebang. Use `set -eu` for error handling (standardized across all init scripts)
 - **Setup Script Error Handling**: Uses `set -eu` to exit on errors. Xcode installation includes a blocking wait loop until GUI installation completes
 - **Path Precedence**: .zshrc sets up paths in this order: Cargo/Rust bins, Homebrew paths, then system defaults
