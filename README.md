@@ -21,14 +21,19 @@
   git add .
   git pull origin master
   ```
-6. Authenticate github.
+6. Run Colima on system startup.
+  ```
+  brew services start colima
+  ```
+7. Authenticate github.
   ```
   gh auth login
   ```
-7. Run user preforence.
+8. Run user preforence.
   ```
   defaults write -g InitialKeyRepeat -int 25
   defaults write -g KeyRepeat -int 2
+  defaults write com.apple.finder AppleShowAllFiles -boolean true
   ```
 
 
