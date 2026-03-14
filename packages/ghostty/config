@@ -38,7 +38,7 @@ palette = 14=#55ffff
 palette = 15=#ffffff
 
 # Global hotkey (Command+` to toggle window)
-keybind = global:super+grave=toggle_window_visibility
+keybind = global:cmd+escape=toggle_visibility
 
 # macOS settings
 window-theme = dark
