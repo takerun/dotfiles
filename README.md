@@ -29,12 +29,15 @@
   - Allow Ghostty in System Settings > Privacy & Security > Input Monitoring. 
 7. Run user preference.
   ```
-  defaults write -g InitialKeyRepeat -int 25
-  defaults write -g KeyRepeat -int 2
+  defaults write NSGlobalDomain InitialKeyRepeat -int 15
+  defaults write NSGlobalDomain KeyRepeat -int 1
   defaults write com.apple.finder AppleShowAllFiles -boolean true
   ```
-8. Setup user preference.
+8. Reboot mac.
+9. Setup user preference.
   - Go to System Settings > Accessibility > Motion and turn on "Reduce motion".
+  - Go to System Settings > Key Board > Touch Bar and set "Function Keys" as the default setting.
+  - Go to System Settings > Desktop & Dock and turn on "Automatically hide and show the Dock".
 
 
 #### TODO
