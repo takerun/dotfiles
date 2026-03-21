@@ -1,10 +1,8 @@
 # Font
-font-family = Monaco
-font-size = 15
+font-size = 14
 
 # Window
-window-width = 80
-window-height = 25
+maximize = true
 
 # Appearance
 background = #000000
@@ -38,7 +36,11 @@ palette = 14=#55ffff
 palette = 15=#ffffff
 
 # Global hotkey (Command+` to toggle window)
-keybind = global:cmd+escape=toggle_visibility
+keybind = global:super+escape=toggle_visibility
+
+# Keybind
+keybind = super+shift+[=previous_tab
+keybind = super+shift+]=next_tab
 
 # macOS settings
 window-theme = dark
