@@ -51,7 +51,7 @@ fi
 # --- Brewfile ---
 if [[ -f "${CURRENT_DIR}/Brewfile" ]]; then
   echo "Installing Homebrew packages..."
-  brew bundle cleanup -v --file="${CURRENT_DIR}/Brewfile" --force
+  brew bundle cleanup --file="${CURRENT_DIR}/Brewfile" --force
   brew bundle -v --file="${CURRENT_DIR}/Brewfile"
 else
     echo "Warning: Brewfile not found at ${CURRENT_DIR}/Brewfile"
